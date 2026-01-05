@@ -23,7 +23,7 @@ const Form = () => {
 
             {FormDatasexy.map((formD, index) => {
                 if (formD.options && formD.type==='select' && formD.options.length > 0) { return (
-                    <div key={index} hidden={
+                    <div className='bro' key={index} hidden={
                         formD.showIf !== undefined &&
                         formD.dependsOn &&
                         !(formD.showIf && typeof formD.dependsOn === 'string' && formD.showIf && formD?.showIf === formData[formD?.dependsOn])}>
@@ -43,18 +43,19 @@ const Form = () => {
                         </div>
                 )} else if(formD.type==='text') {
                     return (
-                        <div hidden={
+                        <div className='bro' hidden={
                             false
                         }
                         >
                             <label htmlFor={formD.name}>{formD.name}: </label>
-                            <input id={formD.name} type='text' placeholder='' alt='' name={formD.name} value={formData?.[formD.name]} onChange={handleChange}/>
+                            <input id={formD.name} type='text' required={formD?.validation?.required} pattern={formD?.validation?.pattern} placeholder='' alt='' name={formD.name} value={formData?.[formD.name]} onChange={handleChange}/>
+                            <div>{formD?.validation?.message}</div>
                         </div>
                     )
                 }
             })}
 
-            <label htmlFor="text">Text: </label>
+            {/* <label htmlFor="text">Text: </label>
             <input id="text" type='text' placeholder='' alt='' name="text" value={formData?.text} onChange={handleChange}/>
 
             <label htmlFor="Password">Password: </label>
@@ -84,7 +85,7 @@ const Form = () => {
             <label htmlFor="car">
                 <input id="car" name="checkbox" value={formData?.checkbox} onChange={handleChange} type="checkbox" value="car" required></input>
                 Car
-            </label>
+            </label> */}
 
             <button type='submit'>Submit</button>
         </form>
